@@ -1,11 +1,11 @@
 # 목차
-- [1. SGD(Stochastic Gradient Descent)](#SGD(Stochastic-Gradient-Descent))
+- [1. SGD(Stochastic Gradient Descent)](#sgd)
 - [2. Adam](#adam)
 - [3. Dropout](#dropout)
-- [4. FNN(Feed-forward Neural Network)](#FNN(Feed-forward-Neural-Network))
+- [4. FNN(Feed-forward Neural Network)](#fnn)
 
 
-# SGD(Stochastic Gradient Descent)
+# SGD
 원래 배치 경사하강법은 데이터 전체에 대해 따져보고 역전파를 진행했었는데요,
 
 이게 문제가 데이터 배치 하나를 통으로 살펴보다 보니 데이터 사이즈가 커질 수록 시간이 무지막지하게 오래 걸립니다.
@@ -72,7 +72,7 @@ NAdam, RAdam 등도 있다고 하는데, 범용적으로 Adam이 많이 쓰입�
 
 학습 시에만 사용하고, 실제 테스트 때에는 사용하지 않습니다.
 
-# FNN (Feed-forward Neural Network)
+# FNN
 
 FNN은 사실상 예전에 공부를 했던 다중 퍼셉트론과 일맥상통합니다.
 
