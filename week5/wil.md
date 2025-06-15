@@ -1,8 +1,8 @@
 # 목차
-- [1. SGD(Stochastic Gradient Descent)](#sgd)
+- [1. SGD (Stochastic Gradient Descent)](#sgd)
 - [2. Adam](#adam)
 - [3. Dropout](#dropout)
-- [4. FNN(Feed-forward Neural Network)](#fnn)
+- [4. FNN (Feed-forward Neural Network)](#fnn)
 
 
 # SGD
