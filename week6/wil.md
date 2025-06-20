@@ -1,3 +1,16 @@
+# 목차
+
+- [0. CNN](#cnn)
+- [1. 파라미터 소개](#파라미터-소개)
+  * [kernel_size](#kernel-size)
+  * [padding](#padding)
+  * [stride](#stride)
+  * [dilation](#dilation)
+- [2. LeNet](#lenet)
+- [3. AlexNet](#alexnet)
+
+# CNN
+
 https://youtu.be/_d9pCrZNnYk?si=3XOSRpdPoPFe_Yha
 
 임커밋님의 영상을 보고 기본적인 개념은 쉽게 잡을 수가 있었어요.\
@@ -33,7 +46,7 @@ PyTorch의 2차원 CNN 모델을 보겠습니다...
 
 
 
-## kernel_size
+## kernel size
 
 
 kernel_size는 기본적으로 한 연산에서 계산할 범위를 말합니다. 필터라고도 부릅니다.\
@@ -101,5 +114,76 @@ dilation은 연산 내에서 커널이 보는 범위를 늘려주는 것입니�
 `2 * padding = dilation * (kernel_size - 1)`
 이 성립해야 shape가 유지됩니다.
 
+이런 CNN망을 거친 후에, MaxPooling 층 같은 것을 거쳐 연산 사이즈를 줄이고,\
+Flatten 후 출력층으로 나오는 것이 일반적인 CNN입니다.
+
+# LeNet
+ 
+
+유명하고 효과적인 AlexNet을 공부하기 전에 그 바탕이 되고 더 먼저 개발된 LeNet에 대해 알아보겠습니다.\
+LeCun이 고안한 LeNet-5(1998)은 CNN의 존재 이유를 아주 잘 이해한 이미지 분류 모델입니다.
+
+ 
+
+그 전까지 이미지 분석 모델은 이미지를 FC로 분해해 학습했기 때문에, 파라미터가 너무 많았고, 이미지의 주변 픽셀 간의 상관관계를 무시했기 때문에 비효율적이고 성능도 좋지 않았습니다.
+
+![image](https://github.com/user-attachments/assets/58ec4f6d-03f5-48dc-a9ef-5119227e0e9b)
 
 
+LeNet에서는 그런 단점을 극복하기 위하여 위 형태를 제시합니다.
+
+ 
+
+- C1. 32x32 이미지를 28x28 사이즈의 6개의 feature map으로 치환하고,
+- S2. stride가 2인 연산을 통해 14x14로 줄이고,
+- C3. 다시 10x10 짜리 16개의 층으로 만들고,
+- S4. stride 2인 층으로 다시 5x5 사이즈로 만듭니다.
+- C5. 여기서 16개의 feature map을 120개의 커널을 통해 1x1x120의 층으로 만듭니다.
+- F6. 마지막으로 FC layer로 만들어주고 (tanh를 사용하여) 결과를 출력합니다.
+
+![image](https://github.com/user-attachments/assets/3e7b7df6-9a25-4809-aa9b-5a38ba997a8e)
+
+이런 식으로 나온다고 하네요
+
+C3 layer 학습 방식이 특이한데, 
+
+![image](https://github.com/user-attachments/assets/bcbac3e0-0c99-4465-bdeb-16b2af15123b)
+
+이런 식으로 S2 feature map을 전부 사용하는 것이 아니라 특정 feature map만 빼와서 서로 간의 connection을 줄였습니다.
+
+# AlexNet
+
+https://youtu.be/40Gdctb55BY?si=6gBKKRUDmdrDuThy
+https://www.youtube.com/watch?v=5i2xG4WqR7c
+
+(참고한 영상)
+
+AlexNet은 처음으로 ReLU 비선형 함수를 도입한 모델이라고 하는데요.\
+AlexNet을 기준으로 이미지 분석에 엄청난 딥러닝 붐이 왔다고 해요.
+
+ 
+
+정확도가 급격하게 올라가기 시작한 이 방법에 대해 알아보겠습니다.
+ 
+
+*ReLU 사용*을 통해 6배 빠르게 오류율을 줄일 수 있었다고 합니다.
+
+ 
+
+또한 *2대의 GPU*를 동시에 사용했는데,
+메모리 사용을 늘리기 위하여 사용했다고 합니다.
+
+ 
+
+*LRN layer*이라는 것을 사용을 했다고 합니다. 한국말로는 지역 응답 정규화라고 하는데요.
+feature map 각각의 뉴런에 대해 주변 뉴런들 활성화 정도에 의해 정규화를 수행하는 것이라고 합니다.
+
+![image](https://github.com/user-attachments/assets/02a614cc-fa34-4101-837b-58cba5aef0ee)
+
+LRN 공식은 이렇게 됩니다.
+
+
+그 외에 Pooling을 겹치게 하는 Overlapping Pooling, 데이터 증강, Dropout과 같은 요즘에 많이 쓰이는 방식을 다 도입했습니다.
+
+
+위 영상에서 논문 리뷰를 열심히 해주신 게 있어서 자세한 건 더 살펴보시면 될 듯 합니다 ㅎㅎ
